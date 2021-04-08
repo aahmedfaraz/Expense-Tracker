@@ -1,25 +1,15 @@
 import React from 'react'
+import ElementItem from './layout/ElementItem';
 
-const TransactionHistoryComponent = () => {
+const TransactionHistoryComponent = ({history, clearData}) => {
     return (
         <div className="transaction-history-container">
             <h2>Transaction History</h2>
-            <p>No transactions have taken place yet</p>
+                { history.length === 0 && <p>No transactions have taken place yet</p> }
             <div className="all-transactions-elements">
-                <div className="element">
-                    <div className="income box">
-                        <div className="description">This is description</div>
-                        <div className="amount">00.00</div>
-                    </div>
-                    <div className="cancel-button">x</div>
-                </div>
-                <div className="element">
-                    <div className="expenses box">
-                        <div className="description">This is description</div>
-                        <div className="amount">00.00</div>
-                    </div>
-                    <div className="cancel-button">x</div>
-                </div>
+                { history.length > 0 && history.map((ele,index) => <ElementItem key={index} element={ele}
+                                                                        clearData={clearData}
+                                                                        index={index}/>) }
             </div>
         </div>
     )

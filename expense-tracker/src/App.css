@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 
 :root {
-  --current-balance-percentage-value: 60;
+  --current-balance-percentage-value: 75;
   --color-main: #172225;
   --color-blue: rgb(0, 174, 255);
   --color-blue-dark: rgb(0, 113, 165);
@@ -303,7 +303,7 @@ input {
   width: 100%;
   padding: 5px;
   border-radius: 5px;
-  border: 2px solid gray;
+  border: 1px solid gray;
 }
 
 .form-controls > input:focus {
@@ -342,7 +342,7 @@ form > .btn:active {
   bottom: 0;
   left: auto;
   right: auto;
-  width: 400px;
+  width: 450px;
   max-width: calc(100% - 10px);
   background-color: rgb(102, 102, 102);
   color: white;
@@ -351,7 +351,7 @@ form > .btn:active {
   justify-content: space-between;
   border-radius: 10px;
   transform: translateY(100%);
-  transition: transform 1s ease;
+  transition: transform 700ms ease;
 }
 
 .alert.show {
@@ -359,10 +359,15 @@ form > .btn:active {
   margin-bottom: 10px;
 }
 
+.alert > p {
+  padding: 10px;
+  margin: 0 auto;
+}
+
 .alert > button {
   cursor: pointer;
   background-color: rgb(87, 87, 87);
-  padding: 20px 10px;
+  padding: 40px 10px;
   border: 0;
   color: white;
   border-radius: 0 10px 10px 0;

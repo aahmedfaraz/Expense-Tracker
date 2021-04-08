@@ -1,0 +1,384 @@
+/* Main App CSS */
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+
+:root {
+  --current-balance-percentage-value: 60;
+  --color-main: #172225;
+  --color-blue: rgb(0, 174, 255);
+  --color-blue-dark: rgb(0, 113, 165);
+  /* To change currency of whole app only change here */
+  --currency: "USD ";
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+.App {
+  text-align: center;
+  font-family: "PT Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header Component CSS */
+
+header {
+  width: 100%;
+  background-color: var(--color-main);
+  color: white;
+  padding: 10px;
+}
+
+header > h1 {
+  padding: 10px;
+}
+
+header > ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100px;
+  margin: 0 auto;
+}
+
+header > ul > li {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+  header > h1 {
+    font-size: 25px;
+  }
+}
+
+header > h1::after {
+  text-align: center;
+  content: "React App";
+  font-size: 12px;
+  margin-left: 5px;
+  color: var(--color-blue);
+}
+
+@media screen and (max-width: 430px) {
+  header > h1::after {
+    display: block;
+  }
+}
+
+/* Current Balance Component CSS */
+
+.current-balance-container {
+  width: 400px;
+  max-width: calc(100vw - 20px);
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.circular-progress-container {
+  position: relative;
+}
+
+.circular-progress-container > svg {
+  margin-top: 10px;
+  max-width: 100%;
+}
+
+.circular-progress-container > svg > circle {
+  fill: none;
+}
+
+.inner {
+  stroke: var(--color-blue);
+  stroke-width: 15px;
+  stroke-linecap: round;
+  stroke-dasharray: 426px;
+  stroke-dashoffset: calc(
+    426px - ((426px * var(--current-balance-percentage-value)) / 100)
+  );
+}
+
+.outer {
+  stroke: var(--color-main);
+  stroke-width: 20px;
+}
+
+.current-balance-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.current-balance-percentage::after {
+  content: "%";
+  font-size: 20px;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 5px;
+}
+
+.current-balance {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.current-balance:before {
+  content: var(--currency);
+  font-size: 70%;
+  color: gray;
+}
+
+/* Amount details CSS */
+
+.amount-details-container {
+  width: 400px;
+  max-width: calc(100vw - 20px);
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(201, 201, 201);
+}
+
+.totals {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgb(204, 204, 204);
+  border-bottom-width: 3px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.totals:first-of-type {
+  margin-bottom: 5px;
+}
+
+.totals > span {
+  font-weight: bold;
+}
+
+.totals > span::before {
+  content: var(--currency);
+  font-size: 80%;
+}
+
+.totals:first-of-type > span::before {
+  color: rgb(0, 199, 0);
+}
+
+.totals:last-of-type > span::before {
+  color: tomato;
+}
+
+/* Transaction History Component CSS */
+
+.transaction-history-container {
+  width: 400px;
+  max-width: calc(100vw - 20px);
+  border-bottom: 1px solid rgb(201, 201, 201);
+  padding-bottom: 10px;
+}
+
+.transaction-history-container > h2 {
+  padding-top: 10px;
+}
+
+.element {
+  position: relative;
+  cursor: pointer;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.element:last-of-type {
+  margin-bottom: 0;
+}
+
+.element > .box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-main);
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.box > .description {
+  width: 60%;
+  text-align: justify;
+}
+
+.element > .box.income {
+  border-right: 5px solid rgb(0, 199, 0);
+}
+
+.element > .box.expenses {
+  border-right: 5px solid tomato;
+}
+
+.amount::before {
+  content: var(--currency);
+  font-size: 70%;
+}
+
+.income > .amount {
+  color: rgb(0, 199, 0);
+}
+
+.expenses > .amount {
+  color: tomato;
+}
+
+.cancel-button {
+  background-color: rgb(255, 72, 40);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  line-height: 32px;
+  border-radius: 2px;
+  right: 0;
+  margin-left: 10px;
+  display: none;
+}
+
+.cancel-button:hover {
+  background-color: rgb(211, 59, 33);
+}
+
+.cancel-button:active {
+  transform: scale(0.9);
+}
+
+.element:hover .cancel-button {
+  display: block;
+}
+
+/* Add Transaction Component CSS */
+
+form {
+  width: 400px;
+  max-width: calc(100% - 20px);
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+label {
+  font-size: 12px;
+  color: gray;
+}
+
+input {
+  cursor: pointer;
+}
+
+.form-controls > input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid gray;
+}
+
+.form-controls > input:focus {
+  border-color: var(--color-blue);
+}
+
+input[type="radio"] {
+  margin-right: 2px;
+}
+
+input[type="radio"]:nth-last-of-type(1) {
+  margin-left: 10px;
+}
+
+form > .btn {
+  cursor: pointer;
+  background-color: var(--color-blue);
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+form > .btn:hover {
+  background-color: var(--color-main);
+}
+
+form > .btn:active {
+  transform: scale(0.95);
+}
+
+.alert {
+  position: fixed;
+  bottom: 0;
+  left: auto;
+  right: auto;
+  width: 400px;
+  max-width: calc(100% - 10px);
+  background-color: rgb(102, 102, 102);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  transform: translateY(100%);
+  transition: transform 1s ease;
+}
+
+.alert.show {
+  transform: translateY(0%);
+  margin-bottom: 10px;
+}
+
+.alert > button {
+  cursor: pointer;
+  background-color: rgb(87, 87, 87);
+  padding: 20px 10px;
+  border: 0;
+  color: white;
+  border-radius: 0 10px 10px 0;
+}
+
+.alert > button:active {
+  background-color: black;
+}
+
+.about {
+  padding: 10px 20px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.about > span {
+  color: rgb(0, 140, 255);
+  font-weight: bolder;
+}

@@ -1,11 +1,13 @@
 import React from 'react'
 
-const ElementItem = ({index, element: {description, amount, type}, clearData}) => {
+const ElementItem = ({index, element: {description, amount, type}, clearTransaction}) => {
+    // Print amount in separated format
     const printAmount = (amount) => {
         return parseFloat(amount).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    const clear = () => {
-        clearData(index);
+    // Clear element when click on [x] button
+    const clearElement = () => {
+        clearTransaction(index);
     }
     return (
         <div className="element">
@@ -13,7 +15,7 @@ const ElementItem = ({index, element: {description, amount, type}, clearData}) =
                 <div className="description">{description}</div>
                 <div className="amount">{printAmount(amount)}</div>
             </div>
-            <div className="cancel-button" onClick={clear}>x</div>
+            <div className="cancel-button" onClick={clearElement}>x</div>
         </div>
     )
 }

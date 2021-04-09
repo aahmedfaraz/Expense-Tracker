@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AddTransactionComponent = ({addTransaction, displayAlert, history}) => {
+const AddTransactionComponent = ({addTransaction}) => {
     // Submit form
     const submit = e => {
         e.preventDefault();

@@ -4,16 +4,13 @@ import AmountDetailsComponent from '../AmountDetailsComponent'
 import TransactionHistoryComponent  from "../TransactionHistoryComponent";
 import AddTransactionComponent  from "../AddTransactionComponent";
 
-const Home = ({history,addTransaction, clearTransaction, displayAlert}) => {
+const Home = ({totalIncome, totalExpenses, totalBalance, percentage, history, addTransaction, clearTransaction}) => {
     return (
         <Fragment>
-            < CurrentBalanceComponent history={history}/>
-            < AmountDetailsComponent history={history}/>
-            < TransactionHistoryComponent history={history}
-                clearTransaction={clearTransaction}/>
-            < AddTransactionComponent addTransaction={addTransaction}
-                displayAlert={displayAlert}
-                history={history}/>
+            < CurrentBalanceComponent percentage={percentage} totalBalance={totalBalance}/>
+            < AmountDetailsComponent totalIncome={totalIncome} totalExpenses={totalExpenses}/>
+            < TransactionHistoryComponent history={history} clearTransaction={clearTransaction}/>
+            < AddTransactionComponent addTransaction={addTransaction}/>
         </Fragment>
     )
 }

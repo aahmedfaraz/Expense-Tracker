@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
@@ -10,6 +10,13 @@ import NotFound from './Components/pages/NotFound';
 import Alert from "./Components/Alert";
 
 function App() {
+
+  useEffect(() => {
+    // Update all states as the app started
+    updateStates();
+  })
+
+  // States
   const [totalIncome, setTotalIncome] = useState(null);
   const [totalExpenses, setTotalExpenses] = useState(null);
   const [totalBalance, setTotalBalance] = useState(null);
@@ -27,6 +34,9 @@ function App() {
       type: 'expenses'
     }
   ]);
+
+  // ALL FUNCTIONS
+
   // Update State totals
   const updateStates = () => {
     // Calculate Total Income and Expenses
@@ -38,23 +48,27 @@ function App() {
     if(history.filter(element => element.type === 'expenses').length > 0){
         totalExpenses = history.filter(element => element.type === 'expenses').map(element => element.amount).reduce((acc, amount) => (parseInt(acc) + parseInt(amount)));         
     }
+
+    
+    // Update States
+    setTotalIncome(totalIncome);
+    setTotalExpenses(totalExpenses);
+    setTotalBalance(totalIncome - totalExpenses);
+    
+    // update percentage
+    updatePercentage();
+  }
+
+  // update percentage
+  const updatePercentage = () => {
     // Calculate percentage
     let percentage = parseInt((( totalIncome - totalExpenses ) * 100 ) / totalIncome);
     percentage = percentage ? percentage : 0;
     // Updated Circular Progress bar in UI
     let root = document.querySelector(':root');
     root.style.setProperty('--current-balance-percentage-value', percentage);
-
-    // Update States
-    setTotalIncome(printAmount(totalIncome));
-    setTotalExpenses(printAmount(totalExpenses));
-    setTotalBalance(printAmount(totalIncome - totalExpenses));
     setPercentage(percentage);
-  }
-  
-  // Print amount format
-  const printAmount = (amount) => {
-      return parseFloat(amount).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return percentage;
   }
 
   // Check if transaction is valid to clear the given element otherwise show alert message
@@ -99,7 +113,8 @@ function App() {
             description,
             amount: parseInt(amount),
             type
-          }])
+          }]);
+          updateStates();
         } else {
             displayAlert('You do not have enough balance');
         }
@@ -112,6 +127,7 @@ function App() {
   const clearTransaction = index => {
     if(validateClearTransaction(index)) {
       setHistory(history.filter((ele,ind) => ind !== index));
+      updateStates();
     } else {
       displayAlert('To delete this income you have to delete some of your expenses');
     }
@@ -138,18 +154,22 @@ function App() {
         < HeaderComponent/>
         <Switch>
           {/* Route for Home Page */}
-          <Route exact path='/' render={() => 
-            <Home history={history}
-              addTransaction={addTransaction}
-              displayAlert={displayAlert}
-              clearTransaction={clearTransaction}/>}/>
+          <Route exact path='/' render={() => <Home 
+                                                totalIncome={totalIncome}
+                                                totalExpenses={totalExpenses}
+                                                totalBalance={totalBalance}
+                                                percentage={percentage}
+                                                history={history}
+                                                updatePercentage={updatePercentage}
+                                                addTransaction={addTransaction}
+                                                clearTransaction={clearTransaction}
+                                                />}/>
           {/* Route for About Page */}
           <Route exact path='/about' component={About}/>
           {/* Route for Not Found Page */}
           <NotFound />
         </Switch>
-        <Alert alert={alert}
-          clearAlert={clearAlert}/>
+        <Alert alert={alert} clearAlert={clearAlert}/>
       </div>
     </Router>
   );

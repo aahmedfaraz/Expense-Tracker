@@ -10,12 +10,10 @@ const TransactionHistoryComponent = ({history, clearTransaction}) => {
                 }
             <div className="all-transactions-elements">
                 { 
-                    history.length > 0 && 
-                        history.map((element,index) => 
-                            <ElementItem key={index}
-                                element={element} 
-                                clearTransaction={clearTransaction}
-                                index={index}/>)
+                    history.length > 0 && history.map((element,index) => <ElementItem key={index}
+                                                                            element={element} 
+                                                                            clearTransaction={clearTransaction}
+                                                                            index={index}/>)
                 }
             </div>
         </div>

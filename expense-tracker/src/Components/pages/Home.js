@@ -12,7 +12,8 @@ const Home = ({history,addTransaction, clearData, displayAlert}) => {
             < TransactionHistoryComponent history={history}
                 clearData={clearData}/>
             < AddTransactionComponent addTransaction={addTransaction}
-                displayAlert={displayAlert}/>
+                displayAlert={displayAlert}
+                history={history}/>
         </Fragment>
     )
 }

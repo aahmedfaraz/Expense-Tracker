@@ -1,6 +1,27 @@
 import React from 'react'
 
-const AddTransactionComponent = ({addTransaction, displayAlert}) => {
+const AddTransactionComponent = ({addTransaction, displayAlert, history}) => {
+    const validTransactionAddition = () => {
+        const type = document.getElementById('radio-income').checked ? 'income' : 'expenses';
+        if(type === 'expenses'){
+            const amount = document.getElementById('amount').value;
+            // Get totals
+            let totalIncome = 0;
+            let totalExpenses = 0;
+            if(history.filter(element => element.type === 'income').length > 0) {
+                totalIncome = history.filter(element => element.type === 'income').map(element => element.amount).reduce((acc, amount) => (parseInt(acc) + parseInt(amount)));
+            }
+            if(history.filter(element => element.type === 'expenses').length > 0){
+                totalExpenses = history.filter(element => element.type === 'expenses').map(element => element.amount).reduce((acc, amount) => (parseInt(acc) + parseInt(amount)));         
+            }
+    
+            let balance = totalIncome - totalExpenses;
+            
+            return balance - parseInt(amount) >= 0;
+        } else {
+            return true;
+        }
+    }
     const add = e => {
         e.preventDefault();
         const description = document.getElementById('description').value.trim();
@@ -8,7 +29,11 @@ const AddTransactionComponent = ({addTransaction, displayAlert}) => {
         const type = document.getElementById('radio-income').checked ? 'income' : 'expenses';
 
         if(description && amount){
-            addTransaction(description,amount,type);
+            if(validTransactionAddition()) {
+                addTransaction(description,amount,type);
+            } else {
+                displayAlert('You do not have enough balance');
+            }
         } else {
             displayAlert('Some credentials are missing');
         }

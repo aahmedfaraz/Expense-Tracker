@@ -41,7 +41,7 @@ function App() {
   const addTransaction = (description, amount, type) => {
     setHistory([...history,{
       description,
-      amount,
+      amount: parseInt(amount),
       type
     }])
   }

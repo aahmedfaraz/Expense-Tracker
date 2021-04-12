@@ -1,5 +1,5 @@
 import React from 'react'
-import ElementItem from './layout/ElementItem';
+import ElementItem from '../layout/ElementItem';
 
 const TransactionHistoryComponent = ({history, clearTransaction}) => {
     return (

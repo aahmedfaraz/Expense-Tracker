@@ -3,11 +3,11 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
 // Importing all Components
-import HeaderComponent from './Components/HeaderComponent'
+import HeaderComponent from './Components/layout/HeaderComponent'
 import Home from './Components/pages/Home';
 import About from './Components/pages/About';
 import NotFound from './Components/pages/NotFound';
-import Alert from "./Components/Alert";
+import Alert from "./Components/layout/Alert";
 
 function App() {
 

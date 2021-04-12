@@ -387,6 +387,8 @@ form > .btn:active {
 }
 
 .about > span {
-  color: rgb(0, 140, 255);
-  font-weight: bolder;
+  background-color: rgb(0, 153, 255);
+  color: white;
+  padding: 0 10px;
+  border-radius: 5px;
 }

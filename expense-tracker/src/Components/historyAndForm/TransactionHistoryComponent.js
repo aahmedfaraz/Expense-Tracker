@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ElementItem from '../layout/ElementItem';
 
-const TransactionHistoryComponent = ({history, clearTransaction}) => {
+import globalContext from './../../Context/Global/globalContext';
+
+const TransactionHistoryComponent = () => {
+    const {history} = useContext(globalContext);
+    
     return (
         <div className="transaction-history-container">
             <h2>Transaction History</h2>
@@ -10,10 +14,9 @@ const TransactionHistoryComponent = ({history, clearTransaction}) => {
                 }
             <div className="all-transactions-elements">
                 { 
-                    history.length > 0 && history.map((element,index) => <ElementItem key={index}
-                                                                            element={element} 
-                                                                            clearTransaction={clearTransaction}
-                                                                            index={index}/>)
+                    history.length > 0 && history.map((element,index) => 
+                        <ElementItem key={index} element={element} index={index}/>
+                    )
                 }
             </div>
         </div>

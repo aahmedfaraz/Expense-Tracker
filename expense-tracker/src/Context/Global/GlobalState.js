@@ -7,7 +7,7 @@ const GlobalState = props => {
 
     // Defining initial State
     const initalState = {
-        history: [
+        history: JSON.parse(localStorage.getItem('history')) || [
             {
               description: 'Salary',
               amount: 100000,

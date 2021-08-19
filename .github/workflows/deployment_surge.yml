@@ -9,17 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        
+      - name: Install NodeJS
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
 
-      - uses: egordm/gha-yarn-node-cache@v1
-        
-      - name: Install JS dependencies
-        run: yarn install
-        
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # will run `yarn install` command
+
       - name: Build React App
         run: yarn build
 
       - name: Install Surge
-        run: npm install surge --global
-
+        run: npm install --global surge
+        
       - name: Deploy to Surge
         run: surge ./build expense-tracker-ahmedfaraz.surge.sh --token ${{ secrets.SECRET_SURGE_TOKEN }}

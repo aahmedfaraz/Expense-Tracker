@@ -1,0 +1,26 @@
+name: Deploying react app to surge
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install NodeJS and Yarn
+        uses: egordm/gha-yarn-node-cache@v1
+        
+      - name: Install JS dependencies
+        run: yarn install
+        
+      - name: Build React App
+        run: yarn build
+
+      - name: Install Surge
+        run: npm install surge --global
+
+      - name: Deploy to Surge
+        run: surge ./build expense-tracker-ahmedfaraz.surge.sh --token ${{ secrets.SECRET_SURGE_TOKEN }}

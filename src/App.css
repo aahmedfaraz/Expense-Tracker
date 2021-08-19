@@ -40,6 +40,7 @@ header {
 
 header > h1 {
   padding: 10px;
+  font-weight: unset;
 }
 
 header > ul {
@@ -63,8 +64,8 @@ header > ul > li {
 
 header > h1::after {
   text-align: center;
-  content: "React App";
-  font-size: 12px;
+  content: "By Ahmed Faraz";
+  font-size: 14px;
   margin-left: 5px;
   color: var(--color-blue);
 }

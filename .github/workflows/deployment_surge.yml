@@ -10,8 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install NodeJS and Yarn
-        uses: egordm/gha-yarn-node-cache@v1
+      - uses: egordm/gha-yarn-node-cache@v1
         
       - name: Install JS dependencies
         run: yarn install
